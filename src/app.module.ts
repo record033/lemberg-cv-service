@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {TypeOrmModule} from '@nestjs/typeorm'
-import {config} from './config'
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from '../config';
 import { TechnologiesModule } from './technologies/technologies.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: config.dbUrl
+      url: config.dbUrl,
     }),
-    TechnologiesModule
+    TechnologiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
