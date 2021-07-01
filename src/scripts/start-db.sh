@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-SERVER="lemberg_cv_service";
-PW="123456";
-DB="cv_db";
+SERVER="lemberg_cv";
+PW="161Oioioi";
+DB="postgres";
 
 echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of [$SERVER]"
 (docker kill $SERVER || :) && \
