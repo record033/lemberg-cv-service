@@ -8,8 +8,6 @@ import { TechnologiesModule } from './technologies/technologies.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: config.dbUrl,
     }),
     TechnologiesModule,
   ],
