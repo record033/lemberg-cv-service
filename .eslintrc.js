@@ -8,7 +8,7 @@ module.exports = {
   extends: [
     'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    // 'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
   ],
   plugins: ['@typescript-eslint/eslint-plugin', 'eslint-plugin-import', 'simple-import-sort'],
@@ -62,7 +62,7 @@ module.exports = {
           // External packages.
           ['^@?\\w'],
           // Internal packages.
-          ['^@root'],
+          ['src/?'],
           // Parent imports.
           ['^\\.\\.'],
           // Other relative imports. Put same-folder imports last.

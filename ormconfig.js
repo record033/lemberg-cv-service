@@ -10,7 +10,8 @@ const localConfig = {
   autoLoadEntities: true,
   database: dbUrl,
   username: username,
-  password: password,  
+  password: password,
+  synchronize:true  
 };
 
 const prodConfig = {

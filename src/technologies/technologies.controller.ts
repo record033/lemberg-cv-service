@@ -13,8 +13,8 @@ export class TechnologiesController {
   }
 
   @Get()
-  findAll() {
-    return this.technologiesService.findAll();
+  async findAll() {
+    return await this.technologiesService.findAll();
   }
 
   @Get(':id')
