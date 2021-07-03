@@ -26,9 +26,9 @@ export class TechnologiesService {
     return this.repo.find();
   }
 
-  // findOne(id: number) {
-  //   return this.repo.findOne(id);
-  // }
+  findOne(id: number) {
+    return this.repo.findOne(id);
+  }
 
   // UPDATE
   update(id: number, updateTechnologyDto: UpdateTechnologyDto) {

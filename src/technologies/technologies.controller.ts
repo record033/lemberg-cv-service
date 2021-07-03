@@ -18,10 +18,10 @@ export class TechnologiesController {
     return this.technologiesService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.technologiesService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.technologiesService.findOne(+id);
+  }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateTechnologyDto: UpdateTechnologyDto) {
