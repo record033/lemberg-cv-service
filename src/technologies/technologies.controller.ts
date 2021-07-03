@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TechnologiesService } from './technologies.service';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+
 import { CreateTechnologyDto } from './dto/create-technology.dto';
 import { UpdateTechnologyDto } from './dto/update-technology.dto';
+import { TechnologiesService } from './technologies.service';
 
 @Controller('technologies')
 export class TechnologiesController {
@@ -22,7 +23,7 @@ export class TechnologiesController {
     return this.technologiesService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateTechnologyDto: UpdateTechnologyDto) {
     return this.technologiesService.update(+id, updateTechnologyDto);
   }
