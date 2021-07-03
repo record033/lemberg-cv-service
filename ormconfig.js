@@ -1,7 +1,7 @@
-const host = 'localhost';
-const username = process.env.POSTGRES_USER
-const password = process.env.POSTGRES_PASSWORD
-const dbUrl = process.env.POSTGRES_DATABASE
+const host = process.env.DATABASE_HOST || 'localhost';
+const username = process.env.POSTGRES_USER;
+const password = process.env.POSTGRES_PASSWORD;
+const dbUrl = process.env.POSTGRES_DATABASE;
 
 const localConfig = {
   port: 5432,
@@ -11,11 +11,7 @@ const localConfig = {
   database: dbUrl,
   username: username,
   password: password,
-  synchronize:true  
-};
-
-const prodConfig = {
-  url: process.env.DATABASE_URL,
+  synchronize: true,
 };
 
 module.exports = {

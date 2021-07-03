@@ -10,8 +10,6 @@ import { Technology } from './entities/technology.entity';
 export class TechnologiesService {
   constructor(@InjectRepository(Technology) private readonly repo: Repository<Technology>) {}
 
-  public technologies: CreateTechnologyDto[] = [];
-
   // POST
   create(createTechnologyDto: CreateTechnologyDto) {
     const newEntity = new Technology();
