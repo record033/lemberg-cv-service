@@ -16,27 +16,31 @@ export class TechnologiesService {
   create(createTechnologyDto: CreateTechnologyDto) {
     const newEntity = new Technology();
 
-    newEntity.name = CreateTechnologyDto.name;
+    newEntity.name = createTechnologyDto.name;
 
     return this.repo.save(newEntity);
   }
 
   // GET
-  async findAll() {
-    return await this.repo.find();
+  findAll() {
+    return this.repo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} technology`;
-  }
+  // findOne(id: number) {
+  //   return this.repo.findOne(id);
+  // }
 
   // UPDATE
   update(id: number, updateTechnologyDto: UpdateTechnologyDto) {
-    return `This action updates a #${id} technology`;
+    const newEntity = new Technology();
+
+    newEntity.name = updateTechnologyDto.name;
+
+    return this.repo.update(id, newEntity);
   }
 
   // REMOVE
   remove(id: number) {
-    return `This action removes a #${id} technology`;
+    return this.repo.delete(id);
   }
 }
