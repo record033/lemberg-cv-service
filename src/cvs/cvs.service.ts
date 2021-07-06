@@ -5,23 +5,39 @@ import { Repository } from 'typeorm';
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
 import { Cv } from './entities/cv.entity';
+import { CvProject } from './entities/cv_project.entity';
 
 @Injectable()
 export class CvsService {
-  constructor(@InjectRepository(Cv) private readonly repo: Repository<Cv>) {}
+  constructor(
+    @InjectRepository(Cv) private readonly repo: Repository<Cv>,
+    @InjectRepository(CvProject) private readonly cvProjectRepo: Repository<CvProject>,
+  ) {}
 
-  create(createCvDto: CreateCvDto) {
+  async create(createCvDto: CreateCvDto) {
     const newEntity = new Cv();
 
+    // const cvProjects = await this.cvProjectRepo.findByIds(createCvDto.projects.map((x) => x.id));
+    const cvProjects = createCvDto.projects.map((x) => {
+      const newCvProjects = new CvProject();
+
+      newCvProjects.projectId = x.projectId;
+      newCvProjects.role = x.role;
+
+      return newCvProjects;
+    });
+
+    // await this.cvProjectRepo.insert(cvProjects);
     newEntity.firstName = createCvDto.firstName;
     newEntity.lastName = createCvDto.lastName;
     newEntity.dob = createCvDto.dob;
     newEntity.position = createCvDto.position;
-    newEntity.start_of_experience = createCvDto.start_of_experience;
+    newEntity.startOfExperience = createCvDto.start_of_experience;
     newEntity.description = createCvDto.description;
     newEntity.experience = createCvDto.experience;
-    newEntity.english_level = createCvDto.englishLevel;
-    newEntity.communication_skills = createCvDto.communicationSkills;
+    newEntity.englishLevel = createCvDto.englishLevel;
+    newEntity.communicationSkills = createCvDto.communicationSkills;
+    newEntity.cvProjects = cvProjects;
 
     return this.repo.save(newEntity);
   }
@@ -31,21 +47,22 @@ export class CvsService {
   }
 
   findOne(id: number) {
-    return this.repo.findOne(id);
+    return this.repo.findOne(id, { relations: ['cvProjects'] });
   }
 
   update(id: number, updateCvDto: UpdateCvDto) {
+    // this.cvProjectRepo.findByIds(updateCvDto.projects.map(()))
     const newEntity = new Cv();
 
     newEntity.firstName = updateCvDto.firstName;
     newEntity.lastName = updateCvDto.lastName;
     newEntity.dob = updateCvDto.dob;
     newEntity.position = updateCvDto.position;
-    newEntity.start_of_experience = updateCvDto.start_of_experience;
+    newEntity.startOfExperience = updateCvDto.start_of_experience;
     newEntity.description = updateCvDto.description;
     newEntity.experience = updateCvDto.experience;
-    newEntity.english_level = updateCvDto.englishLevel;
-    newEntity.communication_skills = updateCvDto.communicationSkills;
+    newEntity.englishLevel = updateCvDto.englishLevel;
+    newEntity.communicationSkills = updateCvDto.communicationSkills;
 
     return this.repo.update(id, newEntity);
   }

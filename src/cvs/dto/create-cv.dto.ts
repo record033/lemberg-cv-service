@@ -1,3 +1,9 @@
+interface ICvProject {
+  projectId: number;
+  role: string;
+  id?: number;
+}
+
 export class CreateCvDto {
   firstName: string;
   lastName: string;
@@ -8,4 +14,5 @@ export class CreateCvDto {
   experience: string;
   englishLevel: string;
   communicationSkills: string;
+  projects: ICvProject[];
 }
