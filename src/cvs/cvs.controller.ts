@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { CvsService } from './cvs.service';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
+import { CvsService } from './cvs.service';
 
 @Controller('cvs')
 export class CvsController {
@@ -22,7 +23,7 @@ export class CvsController {
     return this.cvsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateCvDto: UpdateCvDto) {
     return this.cvsService.update(+id, updateCvDto);
   }

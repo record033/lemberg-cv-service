@@ -1,26 +1,56 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
+import { Cv } from './entities/cv.entity';
 
 @Injectable()
 export class CvsService {
+  constructor(@InjectRepository(Cv) private readonly repo: Repository<Cv>) {}
+
   create(createCvDto: CreateCvDto) {
-    return 'This action adds a new cv';
+    const newEntity = new Cv();
+
+    newEntity.firstName = createCvDto.firstName;
+    newEntity.lastName = createCvDto.lastName;
+    newEntity.dob = createCvDto.dob;
+    newEntity.position = createCvDto.position;
+    newEntity.start_of_experience = createCvDto.start_of_experience;
+    newEntity.description = createCvDto.description;
+    newEntity.experience = createCvDto.experience;
+    newEntity.english_level = createCvDto.englishLevel;
+    newEntity.communication_skills = createCvDto.communicationSkills;
+
+    return this.repo.save(newEntity);
   }
 
   findAll() {
-    return `This action returns all cvs`;
+    return this.repo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} cv`;
+    return this.repo.findOne(id);
   }
 
   update(id: number, updateCvDto: UpdateCvDto) {
-    return `This action updates a #${id} cv`;
+    const newEntity = new Cv();
+
+    newEntity.firstName = updateCvDto.firstName;
+    newEntity.lastName = updateCvDto.lastName;
+    newEntity.dob = updateCvDto.dob;
+    newEntity.position = updateCvDto.position;
+    newEntity.start_of_experience = updateCvDto.start_of_experience;
+    newEntity.description = updateCvDto.description;
+    newEntity.experience = updateCvDto.experience;
+    newEntity.english_level = updateCvDto.englishLevel;
+    newEntity.communication_skills = updateCvDto.communicationSkills;
+
+    return this.repo.update(id, newEntity);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} cv`;
+    return this.repo.delete(id);
   }
 }
