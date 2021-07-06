@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Cv {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
   @Column()
   firstName: string;
   @Column()
@@ -12,7 +12,7 @@ export class Cv {
   dob: Date;
   @Column()
   position: string;
-  @Column()
+  @Column({ type: 'text' })
   description: string;
   @Column()
   start_of_experience: Date;
