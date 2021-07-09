@@ -9,6 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "serve": "yarn build && node dist/main",
     "start": "nest start",
     "start:dev": "nodemon --config nodemon.json",
     "start:debug": "nest start --debug --watch",
