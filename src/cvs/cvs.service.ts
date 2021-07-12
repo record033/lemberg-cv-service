@@ -51,7 +51,7 @@ export class CvsService {
   }
 
   update(id: number, updateCvDto: UpdateCvDto) {
-    // this.cvProjectRepo.findByIds(updateCvDto.projects.map(()))
+    this.cvProjectRepo.findByIds(updateCvDto.projects.map(()))
     const newEntity = new Cv();
 
     newEntity.firstName = updateCvDto.firstName;
