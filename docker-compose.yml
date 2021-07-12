@@ -1,0 +1,19 @@
+version: '3'
+
+networks:
+  lemberg_cv_service_network:
+
+services:
+  postgres-cv:
+    image: postgres:13.2
+    container_name: lemberg_cv_service_psql
+    ports:
+      - 5455:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: lemberg_cvs
+    volumes:
+      - ./.db-data:/var/lib/postgresql/data
+    networks:
+      - lemberg_cv_service_network
