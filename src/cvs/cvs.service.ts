@@ -37,7 +37,7 @@ export class CvsService {
     newEntity.experience = createCvDto.experience;
     newEntity.englishLevel = createCvDto.englishLevel;
     newEntity.communicationSkills = createCvDto.communicationSkills;
-    newEntity.cvProjects = cvProjects;
+    // newEntity.cvProjects = cvProjects;
 
     return this.repo.save(newEntity);
   }
@@ -50,8 +50,8 @@ export class CvsService {
     return this.repo.findOne(id, { relations: ['cvProjects'] });
   }
 
-  update(id: number, updateCvDto: UpdateCvDto) {
-    // this.cvProjectRepo.findByIds(updateCvDto.projects.map(()))
+  async update(id: number, updateCvDto: UpdateCvDto) {
+    const cvProjects = await this.cvProjectRepo.findByIds(updateCvDto.projects.map((x) => x.id));
     const newEntity = new Cv();
 
     newEntity.firstName = updateCvDto.firstName;
@@ -63,6 +63,7 @@ export class CvsService {
     newEntity.experience = updateCvDto.experience;
     newEntity.englishLevel = updateCvDto.englishLevel;
     newEntity.communicationSkills = updateCvDto.communicationSkills;
+    newEntity.cvProjects = cvProjects;
 
     return this.repo.update(id, newEntity);
   }
