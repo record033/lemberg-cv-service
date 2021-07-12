@@ -18,14 +18,14 @@ export class CvsService {
     const newEntity = new Cv();
 
     // const cvProjects = await this.cvProjectRepo.findByIds(createCvDto.projects.map((x) => x.id));
-    const cvProjects = createCvDto.projects.map((x) => {
-      const newCvProjects = new CvProject();
+    // const cvProjects = createCvDto.projects.map((x) => {
+    //   const newCvProjects = new CvProject();
 
-      newCvProjects.projectId = x.projectId;
-      newCvProjects.role = x.role;
+    //   newCvProjects.projectId = x.projectId;
+    //   newCvProjects.role = x.role;
 
-      return newCvProjects;
-    });
+    //   return newCvProjects;
+    // });
 
     // await this.cvProjectRepo.insert(cvProjects);
     newEntity.firstName = createCvDto.firstName;
