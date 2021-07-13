@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Project } from 'src/projects/entities/project.entity';
 import { Repository } from 'typeorm';
 
 import { CreateCvDto } from './dto/create-cv.dto';
@@ -12,24 +13,15 @@ export class CvsService {
   constructor(
     @InjectRepository(Cv) private readonly repo: Repository<Cv>,
     @InjectRepository(CvProject) private readonly cvProjectRepo: Repository<CvProject>,
+    @InjectRepository(Project) private readonly projectRepo: Repository<Project>,
   ) {}
 
   async create(createCvDto: CreateCvDto) {
     const newEntity = new Cv();
 
-    // const cvProjects = await this.cvProjectRepo.findByIds(createCvDto.projects.map((x) => x.id));
-    // const cvProjects = createCvDto.projects.map((x) => {
-    //   const newCvProjects = new CvProject();
-
-    //   newCvProjects.projectId = x.projectId;
-    //   newCvProjects.role = x.role;
-
-    //   return newCvProjects;
-    // });
-
-    // await this.cvProjectRepo.insert(cvProjects);
     newEntity.firstName = createCvDto.firstName;
     newEntity.lastName = createCvDto.lastName;
+    newEntity.email = createCvDto.email;
     newEntity.dob = createCvDto.dob;
     newEntity.position = createCvDto.position;
     newEntity.startOfExperience = createCvDto.start_of_experience;
@@ -37,7 +29,6 @@ export class CvsService {
     newEntity.experience = createCvDto.experience;
     newEntity.englishLevel = createCvDto.englishLevel;
     newEntity.communicationSkills = createCvDto.communicationSkills;
-    // newEntity.cvProjects = cvProjects;
 
     return this.repo.save(newEntity);
   }
@@ -51,21 +42,31 @@ export class CvsService {
   }
 
   async update(id: number, updateCvDto: UpdateCvDto) {
-    const cvProjects = await this.cvProjectRepo.findByIds(updateCvDto.projects.map((x) => x.id));
-    const newEntity = new Cv();
+    const cv = await this.repo.findOne(id, { relations: ['cvProjects'] });
 
-    newEntity.firstName = updateCvDto.firstName;
-    newEntity.lastName = updateCvDto.lastName;
-    newEntity.dob = updateCvDto.dob;
-    newEntity.position = updateCvDto.position;
-    newEntity.startOfExperience = updateCvDto.start_of_experience;
-    newEntity.description = updateCvDto.description;
-    newEntity.experience = updateCvDto.experience;
-    newEntity.englishLevel = updateCvDto.englishLevel;
-    newEntity.communicationSkills = updateCvDto.communicationSkills;
-    newEntity.cvProjects = cvProjects;
+    console.log(cv);
 
-    return this.repo.update(id, newEntity);
+    const projects = updateCvDto.cvProjects;
+    delete updateCvDto.cvProjects;
+
+    await this.repo.update(cv.id, updateCvDto);
+    cv.cvProjects.push(
+      ...(await Promise.all(
+        projects.map(async (p) => {
+          console.log(p);
+          const cvProjectEntity = this.cvProjectRepo.create({
+            cv: cv,
+            projectId: p.projectId,
+            role: p.role,
+          });
+          await this.cvProjectRepo.save(cvProjectEntity);
+
+          return cvProjectEntity;
+        }),
+      )),
+    );
+
+    return cv;
   }
 
   remove(id: number) {

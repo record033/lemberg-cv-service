@@ -5,13 +5,16 @@ import { CvProject } from './cv_project.entity';
 @Entity()
 export class Cv {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   firstName: string;
 
   @Column()
   lastName: string;
+
+  @Column()
+  email: string;
 
   @Column()
   dob: Date;
@@ -34,6 +37,6 @@ export class Cv {
   @Column({ name: 'communication_skill' })
   communicationSkills: string;
 
-  @OneToMany(() => CvProject, (cvProject) => cvProject.cvId, { cascade: true })
+  @OneToMany(() => CvProject, (cvProject) => cvProject.cv, { cascade: true })
   cvProjects: CvProject[];
 }

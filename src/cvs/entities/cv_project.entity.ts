@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Project } from 'src/projects/entities/project.entity';
 
@@ -9,13 +9,19 @@ export class CvProject {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ name: 'cv_id' })
+  // @Column({ name: 'cv_id' })
   @ManyToOne(() => Cv, (cv) => cv.cvProjects)
-  cvId: number;
+  cv: Cv;
 
-  @Column({ name: 'project_id' })
-  @OneToOne(() => Project, (project) => project.id)
+  // @Column({ name: 'project_id' })
+  @ManyToOne(() => Project, (project) => project.id)
+  project: Project;
+
+  @Column()
   projectId: number;
+
+  @Column()
+  cvId: number;
 
   @Column()
   role: string;

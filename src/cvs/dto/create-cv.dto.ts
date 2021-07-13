@@ -7,6 +7,7 @@ interface ICvProject {
 export class CreateCvDto {
   firstName: string;
   lastName: string;
+  email: string;
   dob: Date;
   position: string;
   start_of_experience: Date;
@@ -14,5 +15,5 @@ export class CreateCvDto {
   experience: string;
   englishLevel: string;
   communicationSkills: string;
-  projects: ICvProject[];
+  cvProjects: ICvProject[];
 }
