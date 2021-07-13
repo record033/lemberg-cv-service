@@ -4,8 +4,8 @@ const password = process.env.POSTGRES_PASSWORD;
 const dbUrl = process.env.POSTGRES_DATABASE;
 
 const localConfig = {
-  port: 5432,
-  host: host,
+  port: process.env.POSTGRES_PORT,
+  host: process.env.DATABASE_HOST,
   keepConnectionAlive: true,
   autoLoadEntities: true,
   database: dbUrl,
