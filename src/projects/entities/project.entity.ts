@@ -13,7 +13,7 @@ export class Project {
   @Column()
   description: string;
 
-  // @ManyToMany(() => Technology, (technology) => technology.projects)
-  @JoinTable({ name: 'project_technologies' })
+  @ManyToMany(() => Technology, (technology) => technology.projects)
+  @JoinTable({ name: 'technologies' })
   technologies: Technology[];
 }

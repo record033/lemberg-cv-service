@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Project } from 'src/projects/entities/project.entity';
+// import { Project } from 'src/projects/entities/project.entity';
 import { Repository } from 'typeorm';
 
 import { CreateCvDto } from './dto/create-cv.dto';
@@ -13,7 +13,6 @@ export class CvsService {
   constructor(
     @InjectRepository(Cv) private readonly repo: Repository<Cv>,
     @InjectRepository(CvProject) private readonly cvProjectRepo: Repository<CvProject>,
-    @InjectRepository(Project) private readonly projectRepo: Repository<Project>,
   ) {}
 
   async create(createCvDto: CreateCvDto) {
@@ -26,7 +25,6 @@ export class CvsService {
     newEntity.position = createCvDto.position;
     newEntity.startOfExperience = createCvDto.start_of_experience;
     newEntity.description = createCvDto.description;
-    newEntity.experience = createCvDto.experience;
     newEntity.englishLevel = createCvDto.englishLevel;
     newEntity.communicationSkills = createCvDto.communicationSkills;
 

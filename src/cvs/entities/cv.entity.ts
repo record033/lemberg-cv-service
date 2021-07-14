@@ -28,9 +28,6 @@ export class Cv {
   @Column({ name: 'start_of_experience' })
   startOfExperience: Date;
 
-  @Column()
-  experience: string;
-
   @Column({ name: 'english_level' })
   englishLevel: string;
 
