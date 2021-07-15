@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-// import { Project } from 'src/projects/entities/project.entity';
 import { Repository } from 'typeorm';
 
 import { CreateCvDto } from './dto/create-cv.dto';
@@ -41,8 +40,6 @@ export class CvsService {
 
   async update(id: number, updateCvDto: UpdateCvDto) {
     const cv = await this.repo.findOne(id, { relations: ['cvProjects'] });
-
-    console.log(cv);
 
     const projects = updateCvDto.cvProjects;
     delete updateCvDto.cvProjects;

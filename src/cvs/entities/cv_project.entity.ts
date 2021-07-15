@@ -9,11 +9,9 @@ export class CvProject {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  // @Column({ name: 'cv_id' })
   @ManyToOne(() => Cv, (cv) => cv.cvProjects)
   cv: Cv;
 
-  // @Column({ name: 'project_id' })
   @ManyToOne(() => Project, (project) => project.id)
   project: Project;
 
