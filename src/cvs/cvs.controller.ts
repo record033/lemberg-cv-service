@@ -1,6 +1,4 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-
-import { Express } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { CreateCvDto } from './dto/create-cv.dto';

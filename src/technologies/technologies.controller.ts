@@ -10,7 +10,6 @@ export class TechnologiesController {
 
   @Post()
   create(@Body() createTechnologyDto: CreateTechnologyDto) {
-    
     return this.technologiesService.create(createTechnologyDto);
   }
 
