@@ -10,7 +10,6 @@ import { Technology } from './entities/technology.entity';
 export class TechnologiesService {
   constructor(@InjectRepository(Technology) private readonly repo: Repository<Technology>) {}
 
-  // POST
   create(createTechnologyDto: CreateTechnologyDto) {
     const newEntity = new Technology();
 
@@ -19,7 +18,6 @@ export class TechnologiesService {
     return this.repo.save(newEntity);
   }
 
-  // GET
   findAll() {
     return this.repo.find();
   }
@@ -28,7 +26,6 @@ export class TechnologiesService {
     return this.repo.findOne(id);
   }
 
-  // UPDATE
   update(id: number, updateTechnologyDto: UpdateTechnologyDto) {
     const newEntity = new Technology();
 
@@ -37,7 +34,6 @@ export class TechnologiesService {
     return this.repo.update(id, newEntity);
   }
 
-  // REMOVE
   remove(id: number) {
     return this.repo.delete(id);
   }
