@@ -1,4 +1,5 @@
-import { IsString, IsEmail, IsDateString, ValidateNested, IsOptional } from 'class-validator';
+import { IsDateString, IsEmail, IsOptional,IsString, ValidateNested } from 'class-validator';
+
 import { ICvProject } from './create-cvProject.dto';
 
 export class CreateCvDto {

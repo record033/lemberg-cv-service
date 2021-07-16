@@ -1,15 +1,5 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  ParseIntPipe,
-  UseInterceptors,
-  UploadedFile,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+
 import { Express } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 

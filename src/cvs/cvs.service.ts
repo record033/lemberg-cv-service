@@ -42,18 +42,19 @@ export class CvsService {
     const cv = await this.repo.findOne(id, { relations: ['cvProjects'] });
 
     const projects = updateCvDto.cvProjects;
+
     delete updateCvDto.cvProjects;
 
     await this.repo.update(cv.id, updateCvDto);
     cv.cvProjects.push(
       ...(await Promise.all(
         projects.map(async (p) => {
-          console.log(p);
           const cvProjectEntity = this.cvProjectRepo.create({
             cv: cv,
             projectId: p.projectId,
             role: p.role,
           });
+
           await this.cvProjectRepo.save(cvProjectEntity);
 
           return cvProjectEntity;
