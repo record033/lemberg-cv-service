@@ -1,5 +1,8 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 
+import { Express } from 'express';
+import { FileInterceptor } from '@nestjs/platform-express';
+
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
 import { CvsService } from './cvs.service';
@@ -9,6 +12,13 @@ export class CvsController {
   constructor(private readonly cvsService: CvsService) {}
 
   @Post()
+  @UseInterceptors(FileInterceptor('image'))
+  async updloadedFile(@UploadedFile() file) {
+    const response = {
+      originalname: file.originalname,
+      filename: file.filename,
+    };
+  }
   create(@Body() createCvDto: CreateCvDto) {
     return this.cvsService.create(createCvDto);
   }
