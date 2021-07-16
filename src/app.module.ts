@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { MulterModule } from '@nestjs/platform-express';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { CvsModule } from './cvs/cvs.module';
 import { ProjectsModule } from './projects/projects.module';
 import { TechnologiesModule } from './technologies/technologies.module';
