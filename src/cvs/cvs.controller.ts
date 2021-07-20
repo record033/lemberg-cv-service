@@ -21,13 +21,13 @@ export class CvsController {
   constructor(private readonly cvsService: CvsService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('image'))
-  async updloadedFile(@UploadedFile() file) {
-    const response = {
-      originalname: file.originalname,
-      filename: file.filename,
-    };
-  }
+  // @UseInterceptors(FileInterceptor('image'))
+  // async updloadedFile(@UploadedFile() file) {
+  //   const response = {
+  //     originalname: file.originalname,
+  //     filename: file.filename,
+  //   };
+  // }
   create(@Body() createCvDto: CreateCvDto) {
     return this.cvsService.create(createCvDto);
   }
